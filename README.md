@@ -57,11 +57,52 @@ bikes_df["Profit"] = bikes_df["SalesRevenue"] - bikes_df["TotalCostPrice"]
 bikes_df.head()
 ## DATA ANALYSIS
 #### DATA FILTERING
+# filitering out only the data relevant to solving the problem statement
+
+```
+
+is_us = bikes_df["CustomerCountry"] == "United States"
+is_bike = bikes_df["ProductCategory"] == "Bikes"
+bike_in_us = bikes_df[(is_us) & (is_bike)]
+bike_in_us.head()
+#### DATA AGREGATION
+# aggregating the total profit by states in the united states for bikes sales
+
+```
+total_profit_by_states = bike_in_us.pivot_table(values = "Profit", index = "CustomerState", aggfunc = np.sum)
+total_profit_by_states   
+#### DATA AGREGATION
+
+```
+total_profit_by_states = bike_in_us.pivot_table(values = "Profit", index = "CustomerState", aggfunc = np.sum)
+total_profit_by_states    
 
 
 ```
+#### DATA SORTING/RANKING
+# Sorting the aggregated data in order to rank the states according to the top most profitable states
 
 ```
+total_profit_by_states.sort_values("Profit", ascending = False) 
+
+```
+#### RESULT
+# The Top Most-Profitable 5 States for the Bike Product Category in the United States 
+
+```
+
+Top_5_most_profitable_states_us = total_profit_by_states.sort_values("Profit", ascending = False).head()
+Top_5_most_profitable_states_us
+
+```
+## DATA VISUALIZATION
+
+
+
+
+
+
+
 
 
  
